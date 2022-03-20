@@ -25,5 +25,6 @@ the following are instructions I've added at the front of my code so that others
  very rarely code will get stuck on a page, not sure why webdriver.wait doesnt catch this, but simply refresh the page
  after reloading page script resumes where it leaves off.
 
- planned updates: sort problems by difficulty level when saving to local file, cut down on time, save file type as code it was originally written in instead of .txt,
+ planned updates: username and password taken as input from the user, sort problems by difficulty level when saving to local file, 
+ cut down on time, save file type as code it was originally written in instead of .txt,
  save fastest code rather than first accepted code, skip over code that's already saved locally to computer.
