@@ -33,6 +33,7 @@ REPEATI, REPEATJ = 1, 0
 # if for some reason code fails at solved leetcode problem 1 (which has happened, once) the code will restart and resume at problem 1.
 
 
+
 # attempt to change viewport size
 # reading through forums it seems bot detection uses window size to detect scripts
 
@@ -69,6 +70,31 @@ def leetResMain(contI=0, contJ=0):
         os.mkdir(os.getcwd() + '\\Hard')
     except:
         os.chdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes')
+        
+    # build the dictionary where file types will be converted.
+    fileMap = {}
+    fileMap['c++'] = '.cpp'
+    fileMap['java'] = '.java'
+    fileMap['python'] = '.py'
+    fileMap['python3'] = '.py'
+    fileMap['c'] = '.c'
+    fileMap['c#'] = '.cs'
+    fileMap['javascript'] = '.js'
+    fileMap['ruby'] = '.rb'
+    fileMap['swift'] = '.swift'
+    fileMap['go'] = '.go'
+    fileMap['scala'] = '.scala'
+    fileMap['kotlin'] = '.kt'
+    fileMap['rust'] = '.rs'
+    fileMap['php'] = '.php'
+    fileMap['typescript'] = '.ts'
+    fileMap['racket'] = '.rkt'
+    fileMap['erlang'] = '.erl'
+    fileMap['elixir'] = '.ex'
+    fileMap['oracle'] = '.sql'
+    fileMap['mysql'] = '.sql'
+    fileMap['ms sql server'] = '.sql'
+    fileMap['bash'] = '.sh'
 
     # Load login page
     browser = webdriver.Firefox()
@@ -221,16 +247,28 @@ def leetResMain(contI=0, contJ=0):
                 browser.switch_to.window(browser.window_handles[1])
                 solution = WebDriverWait(browser, 10).until(
                     EC.visibility_of_element_located((By.CSS_SELECTOR, '.ace_scroller')))
+                languageType = WebDriverWait(browser, 10).until(
+                    EC.visibility_of_element_located((By.CSS_SELECTOR, '#result_language'))).text
+                languageType.lower()
 
                 # Go to working directory + difficulty level and save information there. then return to working directory
 
                 workingDir = os.getcwd()
 
                 
+
+                
                 os.chdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes' + '\\' + probDiff)
+
+                # check to see if language is in the fileMap, if it is, append it so that it saves
+                # as the correct file type.
+                # if it is not in the fileMap for some reason, it will still save as a .txt file
+                if languageType in fileMap:
+                    solutionfile = open(probname + fileMap[languageType], "w")
+
+                else:
+                    solutionfile = open(probname + ".txt", "w")
                 
-                
-                solutionfile = open(probname + ".txt", "w")
                 solutionfile.write(solution.text)
                 solutionfile.close()
 
