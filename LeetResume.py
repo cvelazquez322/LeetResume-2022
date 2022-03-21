@@ -12,8 +12,9 @@
 # currently it takes ~10 seconds from start to finish to download one problem, and then move to the next.
 
 
-# planned updates: sort problems by difficulty level when saving to local file, cut down on time, save file type as code it was originally written in instead of .txt,
-# save fastest code rather than first accepted code, skip over code that's already saved locally to computer.
+# planned updates: sort problems by difficulty level when saving to local file (COMPLETED), cut down on time, save file type as code it was originally written in instead of .txt,
+# save fastest code rather than first accepted code, skip over code that's already saved locally to computer which will drastically cut down on time when this is ran again,
+# find out why very rarely code will hang and requires a manual refresh in the browser rather than being caught by my wait conditions, and fix that issue.
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -27,8 +28,9 @@ import math
 #TESTING: remember to set REPEATI to 1 and REPEATJ to 0 when not testing for bugs
 REPEATI, REPEATJ = 1, 0
 # REFERS TO LINE ABOVE:
-# repeati needs to start at 1 as 'div.odd\:bg-layer-1:nth-child(' + str(i) + ') > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a:nth-child(1)'
+# repeati needs to start at 1 as the following line: 'div.odd\:bg-layer-1:nth-child(' + str(i) + ') > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a:nth-child(1)'
 # will never need 0 and our if check to repeat the program checks for the existence of repeati
+# if for some reason code fails at solved leetcode problem 1 (which has happened, once) the code will restart and resume at problem 1.
 
 
 # attempt to change viewport size
@@ -61,6 +63,12 @@ def leetResMain(contI=0, contJ=0):
         os.chdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes')
     except:
         os.chdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes')
+    try:
+        os.mkdir(os.getcwd() + '\\Easy')
+        os.mkdir(os.getcwd() + '\\Medium')
+        os.mkdir(os.getcwd() + '\\Hard')
+    except:
+        os.chdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes')
 
     # Load login page
     browser = webdriver.Firefox()
@@ -81,11 +89,11 @@ def leetResMain(contI=0, contJ=0):
 
     loginElem = browser.find_element(By.CSS_SELECTOR, '#id_login')
     # username below
-    loginElem.send_keys('fakeusername')
+    loginElem.send_keys('FakeUsername')
 
     loginElemPass = browser.find_element(By.CSS_SELECTOR, '#id_password')
     # password below
-    loginElemPass.send_keys('fakepassword')
+    loginElemPass.send_keys('FakePassword')
 
     # click login page, do it 'live' since .sumbit() wouldn't work
     submitElem = browser.find_element(
@@ -165,6 +173,10 @@ def leetResMain(contI=0, contJ=0):
                 probElem = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.odd\:bg-layer-1:nth-child(' + str(
                     i) + ') > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a:nth-child(1)')))
 
+                # get difficulty of problem
+                probDiff = browser.find_element(By.CSS_SELECTOR, 'div.odd\:bg-layer-1:nth-child('+ str(i) +') > div:nth-child(5) > span:nth-child(1)').text
+
+                # print the name of problem to terminal to let user know what problem they are currently on
                 print(probElem.text)
                 probname = probElem.text
                 probElem.click()
@@ -209,9 +221,21 @@ def leetResMain(contI=0, contJ=0):
                 browser.switch_to.window(browser.window_handles[1])
                 solution = WebDriverWait(browser, 10).until(
                     EC.visibility_of_element_located((By.CSS_SELECTOR, '.ace_scroller')))
+
+                # Go to working directory + difficulty level and save information there. then return to working directory
+
+                workingDir = os.getcwd()
+
+                
+                os.chdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes' + '\\' + probDiff)
+                
+                
                 solutionfile = open(probname + ".txt", "w")
                 solutionfile.write(solution.text)
                 solutionfile.close()
+
+                os.chdir(workingDir)
+                
                 browser.close()
                 browser.switch_to.window(browser.window_handles[0])
                 time.sleep(3)
@@ -255,7 +279,7 @@ def leetResMain(contI=0, contJ=0):
 
 rlist = []
 
-#when not testing for bugs, remove arguments from leetResMain()
+# when not testing for bugs, remove arguments from leetResMain()
 rlist.append(leetResMain())
 # if rlist[-1][0] == 0 then leetResMain was succesful and skip next block of code
 # otherwise it will restart at the 'co-ordinates' of repeati and repeatj
