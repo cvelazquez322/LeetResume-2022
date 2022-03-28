@@ -1,0 +1,93 @@
+1648444540443	geckodriver	INFO	Listening on 127.0.0.1:53615
+1648444543426	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53616" "-no-remote" "-profile" "C:\\Users\\cvela\\AppData\\Local\\Temp\\rust_mozprofilenfPDV9"
+1648444544527	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\cvela\\AppData\\Local\\Temp\\rust_mozprofilenfPDV9\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53616/devtools/browser/eaa21822-2718-4be0-9894-b349d2cb160c
+1648444547081	Marionette	INFO	Listening on port 53621
+1648444547554	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648444579064	geckodriver	INFO	Listening on 127.0.0.1:53693
+1648444850875	geckodriver	INFO	Listening on 127.0.0.1:53741
+1648444853847	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53742" "-no-remote" "-profile" "C:\\Users\\cvela\\AppData\\Local\\Temp\\rust_mozprofile71psOE"
+1648444854262	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\cvela\\AppData\\Local\\Temp\\rust_mozprofile71psOE\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53742/devtools/browser/b74c9b71-efca-427a-9f82-5ee10d8d1c69
+1648444855884	Marionette	INFO	Listening on port 53747
+1648444855964	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/desktop.dadd3134e.js, line 17: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/desktop.dadd3134e.js, line 17: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://leetcode.com/accounts/login/, line 479: TypeError: document.getElementsByClassName(...)[0] is undefined
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://leetcode.com"
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/navbar-footer/index.23342317b.js, line 12: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/navbar-footer/index.23342317b.js, line 12: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://leetcode.com/, line 522: TypeError: document.getElementsByClassName(...)[0] is undefined
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/desktop.dadd3134e.js, line 17: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/desktop.dadd3134e.js, line 17: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/, line 479: TypeError: document.getElementsByClassName(...)[0] is undefined
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PMessagePort::Msg_PostMessages Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/desktop.dadd3134e.js, line 17: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/desktop.dadd3134e.js, line 17: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/, line 479: TypeError: document.getElementsByClassName(...)[0] is undefined
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/navbar-footer/index.23342317b.js, line 12: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/navbar-footer/index.23342317b.js, line 12: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/desktop.dadd3134e.js, line 17: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/desktop.dadd3134e.js, line 17: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://leetcode.com/problems/maximum-number-of-words-found-in-sentences/, line 479: TypeError: document.getElementsByClassName(...)[0] is undefined
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/navbar-footer/index.23342317b.js, line 12: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/navbar-footer/index.23342317b.js, line 12: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1648444943365	Marionette	INFO	Stopped listening on port 53747
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1648445209300	geckodriver	INFO	Listening on 127.0.0.1:53907
+1648445212275	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53908" "-no-remote" "-profile" "C:\\Users\\cvela\\AppData\\Local\\Temp\\rust_mozprofileqJY3F2"
+1648445212758	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\cvela\\AppData\\Local\\Temp\\rust_mozprofileqJY3F2\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53908/devtools/browser/fc3d1f9c-4f41-431b-ba09-cf9cb373921a
+1648445214352	Marionette	INFO	Listening on port 53913
+1648445214397	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/desktop.dadd3134e.js, line 17: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/desktop.dadd3134e.js, line 17: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://leetcode.com/accounts/login/, line 479: TypeError: document.getElementsByClassName(...)[0] is undefined
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://leetcode.com"
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/navbar-footer/index.23342317b.js, line 12: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/navbar-footer/index.23342317b.js, line 12: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://leetcode.com/, line 522: TypeError: document.getElementsByClassName(...)[0] is undefined
+1648445293629	geckodriver	INFO	Listening on 127.0.0.1:54007
+1648445296603	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "54008" "-no-remote" "-profile" "C:\\Users\\cvela\\AppData\\Local\\Temp\\rust_mozprofileXqj8lq"
+1648445296865	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\cvela\\AppData\\Local\\Temp\\rust_mozprofileXqj8lq\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:54008/devtools/browser/fc498e29-f0df-468a-a5d8-b1b761091246
+1648445298378	Marionette	INFO	Listening on port 54013
+1648445298616	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/desktop.dadd3134e.js, line 17: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/desktop.dadd3134e.js, line 17: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://leetcode.com/accounts/login/, line 479: TypeError: document.getElementsByClassName(...)[0] is undefined
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://leetcode.com"
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/navbar-footer/index.23342317b.js, line 12: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/navbar-footer/index.23342317b.js, line 12: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://leetcode.com/, line 522: TypeError: document.getElementsByClassName(...)[0] is undefined
+1648445349888	Marionette	INFO	Stopped listening on port 54013
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1648446383477	geckodriver	INFO	Listening on 127.0.0.1:54308
+1648446386453	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "54309" "-no-remote" "-profile" "C:\\Users\\cvela\\AppData\\Local\\Temp\\rust_mozprofilerU4K0Y"
+1648446386668	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\cvela\\AppData\\Local\\Temp\\rust_mozprofilerU4K0Y\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:54309/devtools/browser/83bc0ce5-d97b-4f85-8a07-7660f542c7b0
+1648446388394	Marionette	INFO	Listening on port 54314
+1648446388472	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/desktop.dadd3134e.js, line 17: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/desktop.dadd3134e.js, line 17: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://leetcode.com/accounts/login/, line 479: TypeError: document.getElementsByClassName(...)[0] is undefined
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://leetcode.com"
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/navbar-footer/index.23342317b.js, line 12: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://assets.leetcode.com/static_assets/public/webpack_bundles/new-apps/navbar-footer/index.23342317b.js, line 12: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://leetcode.com/, line 522: TypeError: document.getElementsByClassName(...)[0] is undefined
+1648446439693	Marionette	INFO	Stopped listening on port 54314
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
