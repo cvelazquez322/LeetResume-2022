@@ -20,7 +20,7 @@ the following are instructions I've added at the front of my code so that others
  
  
  Please note that this is still a work in progress, but I've done my best to error proof LeetResume.
- The code should catch most errors, and restart from where it fails... most times. 
+ The code should catch most errors, and restart from where it fails, all on its own without any user intervention... most times. 
  However if for some reason it doesn't catch the error, you can restart the code from where it left off at by inserting values into the argument at line 240
  'rlist.append(leetResMain())' can take arguments that will be equal to co-ordinates, if you put rlist.append(leetResMain(5,2)) it will resume on problem 4 of the third solved page,
  note that as of right now you should not resume on the very last page, as this could cause an error.  
