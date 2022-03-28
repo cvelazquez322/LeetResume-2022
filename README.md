@@ -50,8 +50,9 @@ the following are instructions I've added at the front of my code so that others
  
  skip over code that's already saved locally to computer which will drastically cut down on time when this is ran again (COMPLETED),
       
-      Completed by: during step 0 create a list of all files within the Easy, Medium and Hard subfolders, 
-      take this list and turn it into a map for faster lookup time.
+      Completed by: during step 0 create a list of all files within the Easy, Medium and Hard subfolders, then strip everything but the numbers from the problem 
+      take this list and turn it into a dictionary for faster lookup time. 
+      When getting a problems title, check to see if its unique number ID is already within my dictionary. 
  
  find out why very rarely code will hang and requires a manual refresh in the browser rather than being caught by my wait conditions, and fix that issue.
  
