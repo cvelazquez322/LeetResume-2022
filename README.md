@@ -5,7 +5,7 @@ I started this project when I realized I hadn't uploaded to github in awhile and
 
 I went to leetcode to download my previous submissions, 
 however I soon realized that there was not a way to download my solved questions and that it would be rather monotonous to go through, 
-question by question and download each solved problem.
+question by question, copy and paste the code of each solved problem into a text editor, and then save it.
 
 So instead I created LeetResume, a quick and efficent way to download my solved problems. 
 
