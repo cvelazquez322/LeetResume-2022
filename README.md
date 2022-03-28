@@ -30,21 +30,26 @@ the following are instructions I've added at the front of my code so that others
  After reloading webpage script resumes where it leaves off.
 
  planned updates: sort problems by difficulty level when saving to local file (COMPLETED),
+      
       Completed by: when getting problem name, select problem difficulty, and save it so that later we can use it to navigate to the difficulty folder.
       had to create difficulty folders in 'Step: 0'
  
  cut down on time (COMPLETED),
+      
       Completed by:adding webdriver.wait conditions rather than hard coding time.sleep(x)
  
  save file type as code it was originally written in instead of .txt (COMPLETED),
+      
       Completed by: During step 0 created a dictionary which holds language name as key, and their file extensions as values.
       {'Python3' : '.py'} while getting problemSolution information, there's a small section that states what language the problem was solved in.
       We can use this by inputting it into our dictionary, and appending what file type should be use.
  
  save fastest code rather than first accepted code (DROPPING FROM PLANNED UPDATES, might add back at a a later time),
+      
       Note: Leetcode can give various time for various code, the same code given multiple times can have worst 5% efficency or highest 90% efficency.
  
  skip over code that's already saved locally to computer which will drastically cut down on time when this is ran again (COMPLETED),
+      
       Completed by: during step 0 create a list of all files within the Easy, Medium and Hard subfolders, 
       take this list and turn it into a map for faster lookup time.
  
