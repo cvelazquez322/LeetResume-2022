@@ -5,16 +5,27 @@
 # The code should catch most errors, and restart from where it fails... most times. 
 # However if for some reason it doesn't catch the error, you can restart the code from where it left off at by inserting values into the argument at line 240
 # 'rlist.append(leetResMain())' can take arguments that will be equal to co-ordinates, if you put rlist.append(leetResMain(5,2)) it will resume on problem 4 of the third solved page,
-# very rarely code will get stuck on a page, not sure why webdriver.wait doesnt catch this, but simply refresh the page
+# very rarely code will get stuck on a page, not sure why webdriver.wait doesnt catch this, but simply refresh the webpage
 # after reloading page script resumes where it leaves off
 # note that as of right now you should not resume on the very last page, as this could cause an error.  
 # this is a free resource and I will be updating it regularly.
-# currently it takes ~10 seconds from start to finish to download one problem, and then move to the next.
+# currently it takes ~10 seconds from start to finish to download one problem.
+
+# Update 3/27/22, leet resume is much faster after first itteration.
+# example: say that a user runs this and downloads ~1k problems, and then at a later date has completed another 20 problems.
+# LeetResume will now print to screen that 'prob x is already saved locally, continuing to next problem' rather than over writing and redoing the earlier 1k problems, only downloading the new 20
 
 
-# planned updates: sort problems by difficulty level when saving to local file (COMPLETED), cut down on time, save file type as code it was originally written in instead of .txt,
-# save fastest code rather than first accepted code, skip over code that's already saved locally to computer which will drastically cut down on time when this is ran again,
+# planned updates: sort problems by difficulty level when saving to local file (COMPLETED),
+# cut down on time (COMPLETED),
+# save file type as code it was originally written in instead of .txt (COMPLETED,
+# save fastest code rather than first accepted code (DROPPING FROM UPDATES, might add back at a a later time),
+# skip over code that's already saved locally to computer which will drastically cut down on time when this is ran again (COMPLETED),
 # find out why very rarely code will hang and requires a manual refresh in the browser rather than being caught by my wait conditions, and fix that issue.
+# change time.sleep to webdriver wait conditions in earlier portions of code
+# take username and password as arguments
+# maybe, change file save location to be at C:\Program Files (x86) that way users could simply run program and not be bothered where program is being saved.
+# build a GUI? would look better as a project to potential employers
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -35,7 +46,7 @@ REPEATI, REPEATJ = 1, 0
 
 
 # attempt to change viewport size
-# reading through forums it seems bot detection uses window size to detect scripts
+# reading through forums it seems bot detection uses window size to detect scripts, so changing the viewport size 'might' help.
 
 
 def viewport_size(browser, width, height):
@@ -44,6 +55,28 @@ def viewport_size(browser, width, height):
           window.outerHeight - window.innerHeight + arguments[1]];
         """, width, height)
     browser.set_window_size(*window_size)
+
+
+# note: the below function numStripper is an attempt to make my code faster by ignoring problems I've already completed and downloaded locally
+# I plan to use numStripper on all files already downloaded to my computer, put them within a dictionary
+# for o(1) look up time, and then check to see if this problem is already within the dictionary before downloading it.
+# I was going to simply check to see if the problem title such as '877. Stone Game' was already downloaded to computer.
+# however as of last update, problems are now saved as whatever code they were written, so '877. Stone Game' would be saved with a .py extension
+# if a user had written in C++ it would be with a .cpp making it much harder to strip '877. Stone Game.py' with a simple slice.
+# I could use regex, but I'd still need to create a map anyways, unless I want to have a lookup time of o(n^n) as I'd have to lookup if it was already saved locally as os.listdir()
+# returns a list, and with leetcode having over 2000 problems, that could be an issue. it'll be much more efficent to simply during step 0 create a dictionary of already completed problems.
+
+
+# expects a string of a number followed by a period and some letters
+# the above represents how leetcode titles its problems, example: 877. Stone Game.py
+# returns a string of simply the numbers, example: 877
+def numStripper(probStr):
+    rStr = ''
+    for char in probStr:
+        if char.isdecimal():
+            rStr += char
+        else:
+            return rStr
 
 
 # Note to self, I started to make this script much faster by removing the time.sleep() conditions and replacing them
@@ -64,13 +97,38 @@ def leetResMain(contI=0, contJ=0):
         os.chdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes')
     except:
         os.chdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes')
+
+
+    # save current working directory, will be needed later when writing data    
+    workingDir = os.getcwd()
+
+
+    # build files for problems to be saved to
     try:
-        os.mkdir(os.getcwd() + '\\Easy')
-        os.mkdir(os.getcwd() + '\\Medium')
-        os.mkdir(os.getcwd() + '\\Hard')
+        os.mkdir(workingDir + '\\Easy')
+        os.mkdir(workingDir + '\\Medium')
+        os.mkdir(workingDir + '\\Hard')
     except:
-        os.chdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes')
-        
+        os.chdir(workingDir)
+
+    # save current working directory, will be needed later when writing data    
+    workingDir = os.getcwd()
+
+    # will only populate if user has already run leetcode before and is getting their newly completed problems.
+    # goes to each problem file, and creates a list of all problems already saved
+    completedProbsList, completedProbsMap = [], {}
+    completedProbsFiles = [workingDir + '\\Easy', workingDir + '\\Medium', workingDir + '\\Hard']
+    for completedProbs in completedProbsFiles:
+        os.chdir(completedProbs)
+        completedProbsList += os.listdir()
+
+    # Turn that prob list into a probsMap so that there is an 0(1) look up time.
+    for completedProbs in completedProbsList:
+        completedProbsMap[numStripper(completedProbs)] = 1
+
+    
+    
+    
     # build the dictionary where file types will be converted.
     fileMap = {}
     fileMap['c++'] = '.cpp'
@@ -113,28 +171,30 @@ def leetResMain(contI=0, contJ=0):
     # I tried to use loginElem.submit(), but that failed?
     # "I'll do it live"
 
-    loginElem = browser.find_element(By.CSS_SELECTOR, '#id_login')
+    loginElem = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '#id_login')))
     # username below
     loginElem.send_keys('FakeUsername')
 
-    loginElemPass = browser.find_element(By.CSS_SELECTOR, '#id_password')
+    loginElemPass = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '#id_password')))
     # password below
     loginElemPass.send_keys('FakePassword')
 
     # click login page, do it 'live' since .sumbit() wouldn't work
-    submitElem = browser.find_element(
-        By.CSS_SELECTOR, '.btn-content-container__2HVS')
+    submitElem = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((
+        By.CSS_SELECTOR, '.btn-content-container__2HVS')))
     submitElem.click()
     time.sleep(5)
 
     # navigating to problems page
-    pageElem = browser.find_element(
-        By.CSS_SELECTOR, '.navbar-left-container__3-qz > div:nth-child(3) > a:nth-child(1)')
+    pageElem = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((
+        By.CSS_SELECTOR, '.navbar-left-container__3-qz > div:nth-child(3) > a:nth-child(1)')))
     pageElem.click()
     time.sleep(3)
 
     # get the # of completed problems, I can divide this by 50 and
     # use this as my variable to know when to end my program
+
+    #I shouldnt need a webDriverWait portion here, because the page is not changed from the earlier webdriver wait
     solved = int(browser.find_element(By.CSS_SELECTOR, '.pb-0\.5').text)
 
     # we're rounding up as lets say we have 51 problems solved, well 50 solved problems per page, 
@@ -143,8 +203,8 @@ def leetResMain(contI=0, contJ=0):
     solved = math.ceil(solved/50)
 
     # select the "solved" status drop down
-    statusmenuElem = browser.find_element(
-        By.CSS_SELECTOR, '#headlessui-menu-button-15')
+    statusmenuElem = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((
+        By.CSS_SELECTOR, '#headlessui-menu-button-15')))
     statusmenuElem.click()
     time.sleep(3)
 
@@ -201,9 +261,23 @@ def leetResMain(contI=0, contJ=0):
 
                 # get difficulty of problem
                 probDiff = browser.find_element(By.CSS_SELECTOR, 'div.odd\:bg-layer-1:nth-child('+ str(i) +') > div:nth-child(5) > span:nth-child(1)').text
+                
 
-                # print the name of problem to terminal to let user know what problem they are currently on
-                print(probElem.text)
+                
+
+                # check to see if it is already in our files, if it is, simply print that we're skipping this problem
+                # else print the name of problem to terminal to let user know what problem they are currently on
+                if numStripper(probElem.text) in completedProbsMap:
+                    REPEATI += 1
+                    i += 1
+                    print(probElem.text + ' is already saved locally, continuing to next problem')
+                    continue
+
+                else:
+                    print(probElem.text)
+
+
+                
                 probname = probElem.text
                 probElem.click()
                 # time.sleep(3)
@@ -212,16 +286,18 @@ def leetResMain(contI=0, contJ=0):
                 # the next line confuses me, occasionally it needs to be part of my code or an exception will be thrown, and occasionally it needs to not be there, or an error exception will be thrown.
                 # this has been an intermitten problem for quite awhile now, will update if it happens again
                 # UPDATE: on 3/18/22 it needed to be there and on 3/19/22 it needs to not be there. I'm getting an error "no such element exception" on 3/19
-                # putting a try except block on 3/19 to see if that fixes my issue.
+                # putting a try except block on 3/19 to see if that fixes my issue. 3/27 update: there's been no issue since putting try except block, seems this has resolved my error.
+                # looks like it will throw an error, but because its caught, it will simply close geckodriver and restart program, i'm fine with that resolution.
                 try:
                     WebDriverWait(browser, 10).until(EC.invisibility_of_element(
                         browser.find_element(By.ID, "initial-loading")))
                 except NoSuchElementException as exc:
-                    print("hitting an error that has been accounted for")
-                    print(exc)
+                    print("hitting an error that has been accounted for: " + exc + " Program may restart, but will resume where it left off")
                     continue
                 WebDriverWait(browser, 10).until(EC.element_to_be_clickable(
                     (By.CSS_SELECTOR, 'div.css-1lelwtv-TabHeader:nth-child(4) > a:nth-child(1) > div:nth-child(1) > span:nth-child(1) > div:nth-child(1) > span:nth-child(2)'))).click()
+
+                
                 # browser.find_element(By.CSS_SELECTOR, 'div.css-1lelwtv-TabHeader:nth-child(4) > a:nth-child(1) > div:nth-child(1) > span:nth-child(1) > div:nth-child(1) > span:nth-child(2)').click()
                 # time.sleep(3)
 
@@ -252,12 +328,6 @@ def leetResMain(contI=0, contJ=0):
                 languageType.lower()
 
                 # Go to working directory + difficulty level and save information there. then return to working directory
-
-                workingDir = os.getcwd()
-
-                
-
-                
                 os.chdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes' + '\\' + probDiff)
 
                 # check to see if language is in the fileMap, if it is, append it so that it saves
@@ -306,11 +376,15 @@ def leetResMain(contI=0, contJ=0):
             # that will throw an error, as clearly there should only be 1 problem on the second page
             if solved - j == 1:
                 loop = solvedModulo + 1
+
+    #Code timed out for some reason, will restart and resume where it left on on its own. 
     except TimeoutException:
         print("code failed")
         browser.quit()
         print(REPEATI, REPEATJ)
         return [REPEATI, REPEATJ]
+
+    #code was completed correctly, will quit browser, return 0 and the for loop later on will be skipped, and print the exit message
     browser.quit()
     return[0]
 
