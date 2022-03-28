@@ -30,12 +30,21 @@ the following are instructions I've added at the front of my code so that others
  After reloading webpage script resumes where it leaves off.
 
  planned updates: sort problems by difficulty level when saving to local file (COMPLETED),
+ 
  cut down on time (COMPLETED),
+ 
  save file type as code it was originally written in instead of .txt (COMPLETED,
+ 
  save fastest code rather than first accepted code (DROPPING FROM PLANNED UPDATES, might add back at a a later time),
+ 
  skip over code that's already saved locally to computer which will drastically cut down on time when this is ran again (COMPLETED),
+ 
  find out why very rarely code will hang and requires a manual refresh in the browser rather than being caught by my wait conditions, and fix that issue.
+ 
  change time.sleep to webdriver wait conditions in earlier portions of code
+ 
  take username and password as arguments
+ 
  maybe, change file save location to be at C:\Program Files (x86) that way users could simply run program and not be bothered where program is being saved.
+ 
  build a GUI? would look better as a project to potential employers
