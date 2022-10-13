@@ -1,6 +1,5 @@
 # Note to anyone using this, change the lines of os.mkdir/chdir to wherever you'd like for your LeetResume to be saved.
-# You will also need to change loginElem and loginElemPass to whatever your login email and password is. 
-# You will also need to have Selenium installed. 
+# You will also need to have Selenium installed as well as FireFox. 
 # Please note that this is still a work in progress, but I've done my best to error proof LeetResume
 # The code should catch most errors, and restart from where it fails... most times. 
 # However if for some reason it doesn't catch the error, you can restart the code from where it left off at by inserting values into the argument at line 240
@@ -85,18 +84,30 @@ def numStripper(probStr):
 # I've since removed the opitmal code and readded the sleep(3) wait condition
 # this makes the code run much slower than I'd like it to, but it works and doesn't raise any captchas.
 
+def UandP():
+    print('LeetResume')
+    print('Please enter username for Leetcode:')
+    username = input()
+    print('Please enter password for Leetcode:')
+    password = input()
+    #print('Would you like to save this username and password locally to your computer?')
+    return [username, password]
+
+
+
+
 # Currently trying to fix the above comment by making this script fail and then resume where it left off when it is 'caught' by leetcode using wait conditions
-def leetResMain(contI=0, contJ=0):
+def leetResMain(userName, passWord, contI=0, contJ=0):
     global REPEATI, REPEATJ
     #                           Step 0: Prep Work
     # make a directory to save information and go to that directory
     # if directory exists, just change to that directory
     # load up login page
     try:
-        os.mkdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes')
-        os.chdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes')
+        os.mkdir('C:\\Users\\uname\\MyPythonScripts\\LeetRes')
+        os.chdir('C:\\Users\\uname\\MyPythonScripts\\LeetRes')
     except:
-        os.chdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes')
+        os.chdir('C:\\Users\\uname\\MyPythonScripts\\LeetRes')
 
 
     # save current working directory, will be needed later when writing data    
@@ -170,32 +181,39 @@ def leetResMain(contI=0, contJ=0):
     # Put user name and password in below
     # I tried to use loginElem.submit(), but that failed?
     # "I'll do it live"
+    try:
+        loginElem = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '#id_login')))
+        # username below
+        loginElem.send_keys(userName)
 
-    loginElem = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '#id_login')))
-    # username below
-    loginElem.send_keys('FakeUsername')
+        loginElemPass = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '#id_password')))
+        # password below
+        loginElemPass.send_keys(passWord)
 
-    loginElemPass = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '#id_password')))
-    # password below
-    loginElemPass.send_keys('FakePassword')
 
-    # click login page, do it 'live' since .sumbit() wouldn't work
-    submitElem = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((
-        By.CSS_SELECTOR, '.btn-content-container__2HVS')))
-    submitElem.click()
-    time.sleep(5)
+        # click login page, do it 'live' since .sumbit() wouldn't work
+        submitElem = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((
+            By.CSS_SELECTOR, '.btn-content-container__2HVS')))
+        submitElem.click()
+        time.sleep(5)
 
-    # navigating to problems page
-    pageElem = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((
-        By.CSS_SELECTOR, '.navbar-left-container__3-qz > div:nth-child(3) > a:nth-child(1)')))
-    pageElem.click()
-    time.sleep(3)
 
-    # get the # of completed problems, I can divide this by 50 and
-    # use this as my variable to know when to end my program
+        # navigating to problems page
+        pageElem = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((
+            By.CSS_SELECTOR, '.navbar-left-container__3-qz > div:nth-child(3) > a:nth-child(1)')))
+        pageElem.click()
+        time.sleep(3)
 
-    #I shouldnt need a webDriverWait portion here, because the page is not changed from the earlier webdriver wait
-    solved = int(browser.find_element(By.CSS_SELECTOR, '.pb-0\.5').text)
+        # get the # of completed problems, I can divide this by 50 and
+        # use this as my variable to know when to end my program
+
+        #I shouldnt need a webDriverWait portion here, because the page is not changed from the earlier webdriver wait
+        solved = int(browser.find_element(By.CSS_SELECTOR, '.pb-0\.5').text)
+
+    except:
+        print("Login was unsuccessful, please restart program and try again")
+        browser.quit()
+        return[-1]
 
     # we're rounding up as lets say we have 51 problems solved, well 50 solved problems per page, 
     # we're going to need to go to the next page to get the last problem and we're going to want the modulo to get our last i
@@ -203,14 +221,26 @@ def leetResMain(contI=0, contJ=0):
     solved = math.ceil(solved/50)
 
     # select the "solved" status drop down
-    statusmenuElem = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((
-        By.CSS_SELECTOR, '#headlessui-menu-button-15')))
+    # As of 10/3/22 headless menu button seems to change depending on leetcode webpage,
+    # I've seen it be 15, 18, 43, and 39
+    # Updated so script now selects the divs css_selector instead.
+    # had to also update statusMenuElem
+    
+    statusmenuElem = browser.find_element(
+        By.CSS_SELECTOR, '.space-x-2\.5 > div:nth-child(3) > div:nth-child(1)')
+    #By.CSS_SELECTOR, '.space-x-2\.5 > div:nth-child(3) > div:nth-child(1)')))
+    #headlessui-menu-button-43
+    #headlessui-menu-button-43
+    #headlessui-menu-button-39
+    #headlessui-menu-button-43
+    #headlessui-menu-button-43
+    
     statusmenuElem.click()
     time.sleep(3)
 
     # click on said status
     statusElem = browser.find_element(
-        By.CSS_SELECTOR, '#headlessui-menu-item-29 > div:nth-child(1) > div:nth-child(1) > span:nth-child(1)')
+        By.CSS_SELECTOR, '#headlessui-menu-item-39 > div:nth-child(1) > div:nth-child(1)')
     statusElem.click()
     time.sleep(3)
 
@@ -328,7 +358,7 @@ def leetResMain(contI=0, contJ=0):
                 languageType.lower()
 
                 # Go to working directory + difficulty level and save information there. then return to working directory
-                os.chdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes' + '\\' + probDiff)
+                os.chdir('C:\\Users\\uname\\MyPythonScripts\\LeetRes' + '\\' + probDiff)
 
                 # check to see if language is in the fileMap, if it is, append it so that it saves
                 # as the correct file type.
@@ -363,7 +393,8 @@ def leetResMain(contI=0, contJ=0):
 
             # navigate to next set of 50 problems
             if j != solved -1:
-                WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button.flex:nth-child(6)'))).click()
+                WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button.flex:nth-child(7)'))).click()
+                
 
             time.sleep(3)
             REPEATJ += 1
@@ -377,7 +408,7 @@ def leetResMain(contI=0, contJ=0):
             if solved - j == 1:
                 loop = solvedModulo + 1
 
-    #Code timed out for some reason, will restart and resume where it left on on its own. 
+    # IF code has timed out for some reason, will restart and resume where it last was, on its own. 
     except TimeoutException:
         print("code failed")
         browser.quit()
@@ -391,14 +422,19 @@ def leetResMain(contI=0, contJ=0):
 
 rlist = []
 
+#call uandp to get username and password:
+uapList = UandP()
+
 # when not testing for bugs, remove arguments from leetResMain()
-rlist.append(leetResMain())
+rlist.append(leetResMain(uapList[0], uapList[1]))
 # if rlist[-1][0] == 0 then leetResMain was succesful and skip next block of code
 # otherwise it will restart at the 'co-ordinates' of repeati and repeatj
-while(rlist[-1][0]):
+while(rlist[-1][0] > 0):
     print("code failed midway through, resuming at problem " +
           str(rlist[-1][0]) + " on page " + str(rlist[-1][1]))
     print(rlist)
-    rlist.append(leetResMain(rlist[-1][0], rlist[-1][1]))
-
-print("code was successful, closing")
+    rlist.append(leetResMain(uapList[0], uapList[1], rlist[-1][0], rlist[-1][1]))
+if rlist[-1][0] == 0:
+    print("code was successful, closing")
+elif rlist[-1][0] == -1:
+    print('Please double check spelling, capslock, and special characters.')
