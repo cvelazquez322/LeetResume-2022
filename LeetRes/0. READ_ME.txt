@@ -1,5 +1,0 @@
-All Leetcode answers from here on out are in .txt format. 
-
-The reason being for that is they were originally downloaded using my webscraping script. 
-
-The code was either originally written in either Python or SQL. 
