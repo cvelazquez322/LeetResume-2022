@@ -13,20 +13,19 @@ the following are instructions I've added at the front of my code so that others
 
 
  Note to anyone using this, change the lines of os.mkdir/chdir to wherever you'd like for your LeetResume to be saved.
- You will also need to change loginElem and loginElemPass to whatever your login email and password is. 
- You will also need to have Selenium installed. 
+ You will also need to have Selenium and FireFox installed. 
  
- if the above conditions have been satisied, you can simply run the program by hitting F5 in idle and letting the program run.
+ if the above conditions have been satisied, you can simply run the program.
  
  
  Please note that this is still a work in progress, but I've done my best to error proof LeetResume.
  The code should catch most errors, and restart from where it fails, all on its own without any user intervention... most times. 
  However if for some reason it doesn't catch the error, you can restart the code from where it left off at by inserting values into the argument at line 240
  'rlist.append(leetResMain())' can take arguments that will be equal to co-ordinates, if you put rlist.append(leetResMain(5,2)) it will resume on problem 4 of the third solved page,
- note that as of right now you should not resume on the very last page, as this could cause an error.  
+ 
+ 
  this is a free resource and I will be updating it regularly.
  currently it takes ~10 seconds from start to finish to download one problem, and then move to the next.
- very rarely code will get stuck on a page, not sure why webdriver.wait doesnt catch this, but simply refresh the webpage.
  After reloading webpage script resumes where it leaves off.
 
  planned updates: sort problems by difficulty level when saving to local file (COMPLETED),
@@ -54,12 +53,10 @@ the following are instructions I've added at the front of my code so that others
       take this list and turn it into a dictionary for faster lookup time. 
       When getting a problems title, check to see if its unique number ID is already within my dictionary. 
  
- find out why very rarely code will hang and requires a manual refresh in the browser rather than being caught by my wait conditions, and fix that issue.
  
- change time.sleep to webdriver wait conditions in earlier portions of code
  
- take username and password as arguments
+ take username and password as arguments (COMPLETED)
  
  maybe, change file save location to be at C:\Program Files (x86) that way users could simply run program and not be bothered where program is being saved.
  
- build a GUI? would look better as a project to potential employers
+ 
