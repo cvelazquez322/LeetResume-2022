@@ -4,22 +4,20 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-def solution(root, rlist):
+def solution(root, rbool, prev):
     if root.left:
-        solution(root.left, rlist)
-    rlist.append(root.val)
-    if root.right:
-        solution(root.right, rlist)
-    return rlist
-class Solution:
+        solution(root.left,rbool, prev)
+            if prev[0] == None:
+        prev[0] = root.val
+    else:
+        if prev[0] >= root.val:
+            rbool[0] = False
+        prev[0] = root.val
+                    if root.right:
+        solution(root.right,rbool, prev)
+        return rbool[0]
+            class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         if root is None:
             return None
-        pos = solution(root, [])
-        try:
-            for i in range(len(pos)):
-                if pos[i] >= pos[i + 1]:
-                    return False
-        except:
-            return True
-        return True
+        return solution(root, [True], [None])

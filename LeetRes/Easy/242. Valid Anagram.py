@@ -2,16 +2,19 @@ class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         if len(s) != len(t):
             return False
-                slist = list(s)
-        tlist = list(t)
-        tlen = len(tlist)
-        while tlen != 0:
-            if tlist[0] in slist:
-                slist.remove(tlist[0])
-                tlist.pop(0)
-                tlen -= 1
+        imap = {}
+        for item in s:
+            if item in imap:
+                imap[item] += 1
+            else:
+                imap[item] = 1
+        print(imap)
+        for item in t:
+            if item in imap:
+                imap[item] -= 1
             else:
                 return False
-        if len(slist) > 0:
-            return False
-        return True
+            if imap[item] == 0:
+                del imap[item]
+        return not bool(imap)
+            

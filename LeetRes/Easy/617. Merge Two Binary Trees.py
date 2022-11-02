@@ -4,24 +4,22 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-def mergeTreesHelper(root1, root2):
-    if root1 and root2:
-        root1.val = root1.val + root2.val
-            if root1.left and root2.left:
-        mergeTreesHelper(root1.left, root2.left)
-    elif root2.left:
-        root1.left = root2.left
-    if root1.right and root2.right:
-        mergeTreesHelper(root1.right, root2.right)
-    elif root2.right:
-        root1.right = root2.right
-    return root1
-class Solution:
-    def mergeTrees(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> 
-        Optional[TreeNode]:
-        if root1 is None:
+def sHelper(r1, r2):
+    if r1 and r2:
+        r1.val = r1.val + r2.val
+    if r1.left and r2.left:
+        sHelper(r1.left,r2.left)
+    if r2.left and r1.left == None:
+        r1.left = r2.left
+    if r1.right and r2.right:
+        sHelper(r1.right,r2.right)
+    if r2.right and r1.right == None:
+        r1.right = r2.right
+    return r1
+        class Solution:
+    def mergeTrees(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> Optional[TreeNode]:
+        if root1== None:
             return root2
-        if root2 is None:
+        if root2 == None:
             return root1
-        return mergeTreesHelper(root1, root2)
-        
+        return sHelper(root1,root2)

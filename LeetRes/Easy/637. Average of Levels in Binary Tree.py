@@ -13,25 +13,20 @@ def TreeHeight(root, hcounter):
         return 0
     hcounter += 1
     if root.left:
-        return max(TreeHeight(root.left, hcounter), TreeHeight(root.right, 
-            hcounter))
+        return max(TreeHeight(root.left, hcounter), TreeHeight(root.right, hcounter))
     if root.right:
-        return max(TreeHeight(root.left, hcounter),TreeHeight(root.right, hcounter
-            ))
+        return max(TreeHeight(root.left, hcounter),TreeHeight(root.right, hcounter))
     if root.right is None and root.left is None:
         return hcounter
-#returns a list of lists, always with a prebuilt value of [0,0], as long as the 
-    num it is given
+#returns a list of lists, always with a prebuilt value of [0,0], as long as the num it is given
 def ListMaker(num):
     parentList = []
     while num != 0:
         parentList.append([0,0])
         num -= 1
     return parentList
-#expects root, a list of lists with each one containing [0,0], and current depth 
-    of the tree initialized at 0
-#returns a list of nodes, the values at plist[depth][0] and the amount of nodes at 
-    plist[depth][1] 
+#expects root, a list of lists with each one containing [0,0], and current depth of the tree initialized at 0
+#returns a list of nodes, the values at plist[depth][0] and the amount of nodes at plist[depth][1] 
 def nodeVal(root, plist, depth):
     plist[depth][0] += root.val
     plist[depth][1] += 1
@@ -40,8 +35,7 @@ def nodeVal(root, plist, depth):
     if root.right:
         nodeVal(root.right, plist, depth + 1)
     return plist
-#expects a list of lists, each one containing the list of values and the amount of 
-    nodes on that level
+#expects a list of lists, each one containing the list of values and the amount of nodes on that level
 #divides first number by second, adds to a list and then returns that value
 def sol(plist):
     rlist = []

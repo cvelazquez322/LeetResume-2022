@@ -1,12 +1,11 @@
+def sHelper(ilist):
+    even, odd = [], []
+    for item in ilist:
+        if item % 2 == 0:
+            even.append(item)
+        else:
+            odd.append(item)
+    return even + odd
 class Solution:
-    def sortArrayByParity(self, A: List[int]) -> List[int]:
-        rlist = []
-        olist = []
-        if len(A) == 0:
-            return 0
-        for x in A:
-            if x % 2 == 0:
-                rlist.append(x)
-            else:
-                olist.append(x)
-        return rlist + olist
+    def sortArrayByParity(self, nums: List[int]) -> List[int]:
+        return sHelper(nums)

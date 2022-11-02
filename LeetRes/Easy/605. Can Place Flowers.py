@@ -28,8 +28,7 @@ class Solution:
                     i += 1
                     continue
             else:
-                if flowerbed[i -1] == 0 and flowerbed [i] == 0 and flowerbed[i+1] 
-                    == 0:
+                if flowerbed[i -1] == 0 and flowerbed [i] == 0 and flowerbed[i+1] == 0:
                     n -= 1
                     flowerbed[i] = 1
                     i += 1

@@ -35,4 +35,3 @@ class Solution:
             return None
         vlist = inorderTraversal(root)
         return convertBSTHelper(root, vlist)
-                                

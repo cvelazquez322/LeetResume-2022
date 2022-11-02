@@ -3,30 +3,20 @@
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
-from math import ceil
-integer = 0.0
-def linkedlistcounter(node):
-    if node.next:
-        global integer
-        integer += 1
-        linkedlistcounter(node.next)
-    #on final iteration, will not count itself, adds 1
-    #to correct this 
-    return integer + 1
-def numreturned(ll, num):
-    num -= 1
-    while num != 0:
-        return numreturned(ll.next, num)
-    if num == 0:
-        return ll
-class Solution:
+def helper(root, counters):
+    if root.next:
+        counters[0] += 1
+        helper(root.next, counters)
+        else:
+        counters[1] = counters[0]// 2 + 1
+        counters[1] -= 1
+        if counters[1] == 0:
+        counters[0] = root
+        return counters[0]
+                            class Solution:
     def middleNode(self, head: ListNode) -> ListNode:
-        #gets the length of the LL
-        count = linkedlistcounter(head)
-        global integer
-        integer = 0.0
-        if count % 2 == 0:
-            count += 1
-        count = ceil(count/2)
-        return numreturned(head, count)
-               
+        if not head:
+            return None
+        if not head.next:
+            return head
+        return helper(head, [0,-1])

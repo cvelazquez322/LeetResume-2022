@@ -34,6 +34,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import NoSuchElementException
 import os
 import time
+import getpass
 import math
 #TESTING: remember to set REPEATI to 1 and REPEATJ to 0 when not testing for bugs
 REPEATI, REPEATJ = 1, 0
@@ -89,7 +90,7 @@ def UandP():
     print('Please enter username for Leetcode:')
     username = input()
     print('Please enter password for Leetcode:')
-    password = input()
+    password = getpass.getpass()
     #print('Would you like to save this username and password locally to your computer?')
     return [username, password]
 
@@ -104,10 +105,10 @@ def leetResMain(userName, passWord, contI=0, contJ=0):
     # if directory exists, just change to that directory
     # load up login page
     try:
-        os.mkdir('C:\\Users\\uname\\MyPythonScripts\\LeetRes')
-        os.chdir('C:\\Users\\uname\\MyPythonScripts\\LeetRes')
+        os.mkdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes')
+        os.chdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes')
     except:
-        os.chdir('C:\\Users\\uname\\MyPythonScripts\\LeetRes')
+        os.chdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes')
 
 
     # save current working directory, will be needed later when writing data    
@@ -358,7 +359,7 @@ def leetResMain(userName, passWord, contI=0, contJ=0):
                 languageType.lower()
 
                 # Go to working directory + difficulty level and save information there. then return to working directory
-                os.chdir('C:\\Users\\uname\\MyPythonScripts\\LeetRes' + '\\' + probDiff)
+                os.chdir('C:\\Users\\cvela\\MyPythonScripts\\LeetRes' + '\\' + probDiff)
 
                 # check to see if language is in the fileMap, if it is, append it so that it saves
                 # as the correct file type.

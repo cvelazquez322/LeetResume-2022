@@ -1,25 +1,27 @@
 # Definition for a binary tree node.
 # class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-def inoT(root, rlist):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+def helper(root, rlist):
     if root.left:
-        inoT(root.left, rlist)
-    rlist.append(root.val)
+        helper(root.left, rlist)
+    rlist.append(root)
     if root.right:
-        inoT(root.right, rlist)
+        helper(root.right, rlist)
     return rlist
-def ibstHelper(nums):
-    if nums:
-        newroot = TreeNode(nums.pop(0))
-    if nums:
-        newroot.right = ibstHelper(nums)
-    return newroot
-class Solution:
+def rightMaker(ilist):
+    if len(ilist) > 1:
+        ilist[0].left = None
+        ilist[0].right = ilist[1]
+        rightMaker(ilist[1:])
+    if len(ilist) == 1:
+        ilist[0].left = None
+    return ilist[0]
+                class Solution:
     def increasingBST(self, root: TreeNode) -> TreeNode:
-            if root is None:
-                return None
-            ilist = inoT(root, [])
-            return ibstHelper(ilist)
+        if root is None:
+            return None
+        return rightMaker(helper(root, []))
+        

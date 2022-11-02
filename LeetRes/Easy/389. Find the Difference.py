@@ -1,7 +1,16 @@
 class Solution:
     def findTheDifference(self, s: str, t: str) -> str:
-        new_s = list(s)
-        new_t = list(t)
-        for alpha in new_s:
-            new_t.remove(alpha)
-        return new_t[0]
+        mapper = {}
+        for i in s:
+            if i in mapper:
+                mapper[i] += 1
+            else:
+                mapper[i] = 1
+        for i in t:
+            if i in mapper:
+                mapper[i] -= 1
+                if mapper[i] == 0:
+                    del mapper[i]
+            else:
+                return i
+            
