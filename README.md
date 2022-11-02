@@ -57,6 +57,8 @@ the following are instructions I've added at the front of my code so that others
  
  take username and password as arguments (COMPLETED)
  
+ protect password by not echoing to the screen what password is being typed in. (COMPLETED)
+ 
  maybe, change file save location to be at C:\Program Files (x86) that way users could simply run program and not be bothered where program is being saved.
  
  
